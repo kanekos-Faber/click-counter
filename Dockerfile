@@ -4,7 +4,7 @@ WORKDIR /src
 
 RUN apk update && \
     yarn global add create-nuxt-app && \
-    npm install vuex-persistedstate
+    npm install
 
 ENV HOST 0.0.0.0
 EXPOSE 3000
