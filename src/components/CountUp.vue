@@ -12,7 +12,7 @@
     "
   >
     Let's count up!
-    <div><button v-on:click="counter += 1">count up!</button></div>
+    <div><button v-on:click="countUp">count up!</button></div>
     <div>Here is your counter. It's {{ counter }} now.</div>
   </div>
 </template>
@@ -20,8 +20,15 @@
 <script>
 export default {
   name: "CountUp",
-  data: function () {
-    return { counter: 0 };
+  computed: {
+    counter: function () {
+      return this.$store.state.counter.count;
+    },
+  },
+  methods: {
+    countUp(e) {
+      this.$store.commit("counter/increment");
+    },
   },
 };
 </script>
