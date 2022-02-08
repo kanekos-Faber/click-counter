@@ -1,8 +1,16 @@
 const express = require("express");
 const app = express();
+const axios = require("axios");
 
 app.get("/", function (req, res) {
-    res.send("HelloWorld");
+    axios
+        .get("https://jsonplaceholder.typicode.com/todos/1")
+        .then(function (response) {
+            res.send(response.data);
+        })
+        .catch(function (error) {
+            res.send(error.data);
+        });
 });
 
 module.exports = {
