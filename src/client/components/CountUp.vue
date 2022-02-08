@@ -62,7 +62,7 @@ export default {
     callAPI(e) {
       let self = this;
       axios
-        .get("/api")
+        .post("/api", { session_id: self.sessionId })
         .then(function (response) {
           self.response = response;
           self.errorResponse = "";
