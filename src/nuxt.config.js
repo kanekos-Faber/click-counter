@@ -43,5 +43,5 @@ export default {
   },
 
   srcDir: "./client/",
-  serverMiddleware: ["~~/api/"],
+  serverMiddleware: ["~~/api/"]
 }
