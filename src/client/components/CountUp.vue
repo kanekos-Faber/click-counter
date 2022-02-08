@@ -17,12 +17,26 @@
       Here is your counter on session {{ this.sessionId }}. It's
       {{ this.count }} now.
     </div>
+    <div><button v-on:click="callAPI">Call inner API!</button></div>
+    <div>
+      The response was ...<br />
+      {{ this.response }}<br />
+      The error response was ...<br />
+      {{ this.errorResponse }}<br />
+    </div>
   </div>
 </template>
 
 <script>
+const axios = require("axios").default;
 export default {
   name: "CountUp",
+  data() {
+    return {
+      response: "",
+      errorResponse: "",
+    };
+  },
   created() {
     let counter = this.$store.state.counter;
     if (counter === undefined || counter.sessionId.length == 0) {
@@ -44,6 +58,19 @@ export default {
     countUp(e) {
       this.$store.commit("counter/incrementCount");
       this.counter = this.$store.state.counter.count;
+    },
+    callAPI(e) {
+      let self = this;
+      axios
+        .get("/api")
+        .then(function (response) {
+          self.response = response;
+          self.errorResponse = "";
+        })
+        .catch(function (error) {
+          self.response = "";
+          self.errorResponse = error;
+        });
     },
   },
 };
