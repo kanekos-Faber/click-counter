@@ -28,7 +28,6 @@ var jsonParser = bodyparser.json()
 // var urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.post("/", jsonParser, function (req, res) {
-    console.log(req.session.userId);
     if (req.session.userId == undefined) {
         //TODO: Store userId into DynamoDB
         req.session.userId = req.session.id;

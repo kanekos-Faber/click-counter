@@ -28,7 +28,6 @@
 </template>
 
 <script>
-const axios = require("axios").default;
 export default {
   name: "CountUp",
   data() {
@@ -67,7 +66,7 @@ export default {
     },
     callAPI(e) {
       let self = this;
-      axios
+      this.$axios
         .post("/api", { session_id: this.$store.state.counter.sessionId })
         .then(function (response) {
           self.response = response;
