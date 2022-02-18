@@ -47,11 +47,17 @@ export default {
     this.counter = counter.count;
   },
   computed: {
-    sessionId: function () {
-      return this.$store.state.counter.sessionId;
+    sessionId: {
+      get() {
+        return this.$store.state.counter.sessionId;
+      },
+      set() {},
     },
-    count: function () {
-      return this.$store.state.counter.count;
+    count: {
+      get() {
+        return this.$store.state.counter.count;
+      },
+      set() {},
     },
   },
   methods: {
