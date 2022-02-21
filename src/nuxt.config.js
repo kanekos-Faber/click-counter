@@ -1,3 +1,5 @@
+const session = require("express-session");
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -46,5 +48,16 @@ export default {
   },
 
   srcDir: "./client/",
-  serverMiddleware: ["~~/api/"]
+  serverMiddleware: [
+    session({
+      secret: 'thisissecretofclickcounter',
+      resave: true,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: false,
+        maxage: 1000 * 60 * 30
+      }
+    }),
+    "~~/api/"]
 }
