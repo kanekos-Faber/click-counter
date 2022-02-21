@@ -1,22 +1,6 @@
 <!-- Please remove this file from your project -->
 <template>
-  <div
-    class="
-      relative
-      flex
-      items-top
-      justify-center
-      min-h-screen
-      bg-gray-100
-      sm:items-center sm:pt-0
-    "
-  >
-    Let's count up!
-    <div><button v-on:click="countUp">count up!</button></div>
-    <div>
-      Here is your counter on session {{ this.sessionId }}. It's
-      {{ this.count }} now.
-    </div>
+  <div>
     <div><button v-on:click="callAPI">Call inner API!</button></div>
     <div>
       The response was ...<br />
@@ -36,38 +20,11 @@ export default {
       errorResponse: "",
     };
   },
-  created() {
-    let counter = this.$store.state.counter;
-    if (counter === undefined || counter.sessionId.length == 0) {
-      this.$store.commit("counter/initSession");
-    }
-    counter = this.$store.state.counter;
-    this.sessionId = counter.sessionId;
-    this.counter = counter.count;
-  },
-  computed: {
-    sessionId: {
-      get() {
-        return this.$store.state.counter.sessionId;
-      },
-      set() {},
-    },
-    count: {
-      get() {
-        return this.$store.state.counter.count;
-      },
-      set() {},
-    },
-  },
   methods: {
-    countUp(e) {
-      this.$store.commit("counter/incrementCount");
-      this.counter = this.$store.state.counter.count;
-    },
     callAPI(e) {
       let self = this;
       this.$axios
-        .post("/api", { session_id: this.$store.state.counter.sessionId })
+        .post("/api")
         .then(function (response) {
           self.response = response;
           self.errorResponse = "";
